@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1088216958634",
+    "project_id": "usm-coma-ticket",
+    "storage_bucket": "usm-coma-ticket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088216958634:android:911d04bb343c1672c7f2d3",
+        "android_client_info": {
+          "package_name": "com.example.usm_coma_ticket_cliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088216958634-p0cf0bgjkmalh0f9l6dnpuk1ttft8o56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFVFV-CyhbBWXxKtrIvwV4rU0GDcvRmdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088216958634-p0cf0bgjkmalh0f9l6dnpuk1ttft8o56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
