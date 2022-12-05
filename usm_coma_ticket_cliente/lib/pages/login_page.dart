@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:usm_coma_ticket_cliente/constants.dart';
 
 import '../widgets/campo_login_widget.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,41 +12,71 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _email = '';
+  String _pass = '';
+
+  late final FocusNode _passFocusNode;
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    _passFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _passFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kCampoLoginColor,
-      body: Container(
-        margin: EdgeInsets.all(12),
-        padding: EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        /* margin: EdgeInsets.all(12),
+        padding: EdgeInsets.all(10), */
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            physics: ClampingScrollPhysics(),
+            /* mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start, */
+            padding: EdgeInsets.all(15),
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 70.0, bottom: 60),
-                child: Center(
-                  child: Image.asset(
+              Center(
+                  child: Padding(
+                padding: const EdgeInsets.only(top: 50, bottom: 50),
+                child: Image(
+                  height: 140,
+                  color: kTextLoginColor,
+                  image: AssetImage(
                     'assets/cropped_logo_coma_ticket.png',
                     //'assets/cropped_coma_ticket_variant.png',
-                    height: 140,
-                    color: kTextLoginColor,
                   ),
                 ),
-              ),
+              )),
               CampoLoginWidget(
                 hintText: 'Email',
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: () =>
+                    FocusScope.of(context).requestFocus(_passFocusNode),
               ),
               SizedBox(
                 height: 20,
               ),
               CampoLoginWidget(
-                hintText: 'Contraseña',
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-              ),
+                  hintText: 'Contraseña',
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                  focusNode: _passFocusNode,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: () {
+                    FocusScope.of(context).unfocus;
+                  }),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Center(
@@ -64,7 +95,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    MaterialPageRoute route = MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    );
+                    Navigator.push(context, route);
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),

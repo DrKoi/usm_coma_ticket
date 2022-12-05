@@ -5,12 +5,20 @@ class CampoLoginWidget extends StatefulWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final bool? obscureText;
-  const CampoLoginWidget({
-    super.key,
-    this.hintText,
-    this.keyboardType,
-    this.obscureText = false,
-  });
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final void onFieldSubmitted;
+  final void validator;
+
+  const CampoLoginWidget(
+      {super.key,
+      this.hintText,
+      this.keyboardType,
+      this.obscureText = false,
+      this.focusNode,
+      this.onFieldSubmitted,
+      this.textInputAction,
+      this.validator});
 
   @override
   State<CampoLoginWidget> createState() => _CampoLoginWidgetState();
@@ -31,9 +39,16 @@ class _CampoLoginWidgetState extends State<CampoLoginWidget> {
           fontSize: 20,
           color: kTextLoginColor,
         ),
+        textCapitalization: TextCapitalization.none,
         cursorColor: kTextLoginColor,
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText!,
+        focusNode: widget.focusNode,
+        onFieldSubmitted: (value) => widget.onFieldSubmitted,
+        textInputAction: widget.textInputAction,
+        validator: (value) {
+          widget.validator;
+        },
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: widget.hintText,
