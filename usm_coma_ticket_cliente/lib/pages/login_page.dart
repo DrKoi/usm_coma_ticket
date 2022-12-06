@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usm_coma_ticket_cliente/constants.dart';
 
 import '../widgets/campo_login_widget.dart';
-import 'home_page.dart';
+import 'admin_pages/a_home_page.dart';
+import 'client_pages/c_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,13 +15,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _email = '';
-  String _pass = '';
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController passCtrl = TextEditingController();
 
   late final FocusNode _passFocusNode;
 
   final _formKey = GlobalKey<FormState>();
-
+  String error = '';
   @override
   void initState() {
     _passFocusNode = FocusNode();
@@ -27,6 +30,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
+    /* emailCtrl.dispose();
+    passCtrl.dispose(); */
     _passFocusNode.dispose();
     super.dispose();
   }
@@ -60,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               )),
               CampoLoginWidget(
                 hintText: 'Email',
+                controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: () =>
@@ -70,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CampoLoginWidget(
                   hintText: 'Contraseña',
+                  controller: passCtrl,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   focusNode: _passFocusNode,
@@ -96,10 +103,11 @@ class _LoginPageState extends State<LoginPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    MaterialPageRoute route = MaterialPageRoute(
+                    /* MaterialPageRoute route = MaterialPageRoute(
                       builder: (context) => HomePage(),
                     );
-                    Navigator.push(context, route);
+                    Navigator.push(context, route); */
+                    login();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -191,5 +199,49 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void login() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailCtrl.text.trim(),
+        password: passCtrl.text.trim(),
+      );
+
+      if (emailCtrl.text.contains('@comaticket.cl')) {
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        sp.setString('userEmail', userCredential.user!.email.toString());
+
+        MaterialPageRoute route = MaterialPageRoute(
+          builder: (context) => AdminHomePage(),
+        );
+        Navigator.pushReplacement(context, route);
+      } else {
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        sp.setString('userEmail', userCredential.user!.email.toString());
+
+        MaterialPageRoute route = MaterialPageRoute(
+          builder: (context) => ClienteHomePage(),
+        );
+        Navigator.pushReplacement(context, route);
+      }
+    } on FirebaseAuthException catch (ex) {
+      switch (ex.code) {
+        case 'user-not-found':
+          error = 'Usuario no existe';
+          break;
+        case 'wrong-password':
+          error = 'Contraseña incorrecta';
+          break;
+        case 'user-disabled':
+          error = 'Cuenta desactivada';
+          break;
+        default:
+          error = ex.message.toString();
+          break;
+      }
+      setState(() {});
+    }
   }
 }

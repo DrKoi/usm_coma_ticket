@@ -9,6 +9,7 @@ class CampoLoginWidget extends StatefulWidget {
   final TextInputAction? textInputAction;
   final void onFieldSubmitted;
   final void validator;
+  final TextEditingController? controller;
 
   const CampoLoginWidget(
       {super.key,
@@ -18,7 +19,8 @@ class CampoLoginWidget extends StatefulWidget {
       this.focusNode,
       this.onFieldSubmitted,
       this.textInputAction,
-      this.validator});
+      this.validator,
+      this.controller});
 
   @override
   State<CampoLoginWidget> createState() => _CampoLoginWidgetState();
@@ -49,6 +51,7 @@ class _CampoLoginWidgetState extends State<CampoLoginWidget> {
         validator: (value) {
           widget.validator;
         },
+        controller: widget.controller,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: widget.hintText,
