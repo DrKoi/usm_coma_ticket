@@ -172,16 +172,16 @@ class _LoginPageState extends State<LoginPage> {
                       label: Text('Iniciar sesión con Google',
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                       onPressed: () async {
-                        UserCredential userCredential =
-                            await FirebaseServices().signInWithGoogle();
-                        SharedPreferences sp =
+                        //UserCredential userCredential =
+                        await FirebaseServices().signInWithGoogle();
+                        /* SharedPreferences sp =
                             await SharedPreferences.getInstance();
                         sp.setString(
-                            'userEmail', userCredential.user!.email.toString());
+                            'userEmail', userCredential.user!.email.toString()); */
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MainPage()));
+                                builder: (context) => ClienteHomePage()));
                       },
                     ),
                   )

@@ -14,22 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1088216958634-0urvojuavjgfr3r3fgdnef94o5uhpbrm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.usm_coma_ticket_cliente",
-            "certificate_hash": "cdfa372c4e17e802f7f6a95b8d46dd9376f67fa7"
-          }
-        },
-        {
-          "client_id": "1088216958634-8q7lk8q2rd6igksu3qm903jmprhbhkp3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.usm_coma_ticket_cliente",
-            "certificate_hash": "72f8f4cdaff007413058f27e64de5e1f51794a9f"
-          }
-        },
-        {
           "client_id": "1088216958634-p0cf0bgjkmalh0f9l6dnpuk1ttft8o56.apps.googleusercontent.com",
           "client_type": 3
         }
