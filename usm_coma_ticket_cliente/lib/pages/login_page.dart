@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usm_coma_ticket_cliente/constants.dart';
+import 'package:usm_coma_ticket_cliente/pages/main_page.dart';
 
+import '../services/auth_service.dart';
 import '../widgets/campo_login_widget.dart';
 import 'admin_pages/a_home_page.dart';
 import 'client_pages/c_home_page.dart';
@@ -156,14 +158,33 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
+              //BOTON DE INICIO DE SESION CON GOOGLE
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    'assets/google.png',
-                    height: 45,
-                    width: 45,
-                  ),
+                  Center(
+                    child: OutlinedButton.icon(
+                      icon: Image.asset(
+                        'assets/google.png',
+                        height: 45,
+                        width: 45,
+                      ),
+                      label: Text('Iniciar sesión con Google',
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
+                      onPressed: () async {
+                        UserCredential userCredential =
+                            await FirebaseServices().signInWithGoogle();
+                        SharedPreferences sp =
+                            await SharedPreferences.getInstance();
+                        sp.setString(
+                            'userEmail', userCredential.user!.email.toString());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainPage()));
+                      },
+                    ),
+                  )
                 ],
               ),
               Padding(
@@ -209,23 +230,13 @@ class _LoginPageState extends State<LoginPage> {
         password: passCtrl.text.trim(),
       );
 
-      if (emailCtrl.text.trim().endsWith('@comaticket.cl')) {
-        SharedPreferences sp = await SharedPreferences.getInstance();
-        sp.setString('userEmail', userCredential.user!.email.toString());
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      sp.setString('userEmail', userCredential.user!.email.toString());
 
-        MaterialPageRoute route = MaterialPageRoute(
-          builder: (context) => AdminHomePage(),
-        );
-        Navigator.pushReplacement(context, route);
-      } else {
-        SharedPreferences sp = await SharedPreferences.getInstance();
-        sp.setString('userEmail', userCredential.user!.email.toString());
-
-        MaterialPageRoute route = MaterialPageRoute(
-          builder: (context) => ClienteHomePage(),
-        );
-        Navigator.pushReplacement(context, route);
-      }
+      MaterialPageRoute route = MaterialPageRoute(
+        builder: (context) => MainPage(),
+      );
+      Navigator.pushReplacement(context, route);
     } on FirebaseAuthException catch (ex) {
       switch (ex.code) {
         case 'user-not-found':
