@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
         password: passCtrl.text.trim(),
       );
 
-      if (emailCtrl.text.contains('@comaticket.cl')) {
+      if (emailCtrl.text.trim().endsWith('@comaticket.cl')) {
         SharedPreferences sp = await SharedPreferences.getInstance();
         sp.setString('userEmail', userCredential.user!.email.toString());
 

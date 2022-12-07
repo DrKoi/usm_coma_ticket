@@ -7,7 +7,7 @@ class EntradasProvider {
   final apiURL = 'http://10.0.2.2:8000/api';
 
   Future<List<dynamic>> getCategorias() async {
-    var respuesta = await http.get(Uri.parse(apiURL + '/categorias'));
+    var respuesta = await http.get(Uri.parse(apiURL + '/eventos'));
 
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
@@ -35,8 +35,8 @@ class EntradasProvider {
         'Accept': 'application/json',
       },
       body: jsonEncode(<String, dynamic>{
-        'cod_producto': cod_producto,
-        'nombre': nombre,
+        'cod_entrada': cod_producto,
+        'cod_evento': nombre,
         'precio': precio,
         'stock': stock,
         'categoria': categoria,
@@ -46,17 +46,10 @@ class EntradasProvider {
     return json.decode(respuesta.body);
   }
 
-  //borrar producto
   Future<bool> borrar(String cod_producto) async {
     var respuesta =
         await http.delete(Uri.parse(apiURL + '/entradas/' + cod_producto));
     return respuesta.statusCode == 200;
-
-    // if (respuesta.statusCode == 200) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
   //retorna los datos de 1 producto en particular
