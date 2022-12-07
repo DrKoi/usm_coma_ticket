@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('entradas', function (Blueprint $table) {
-            $table->string('cod_entrada')->primary();
+            $table->string('cod_entrada', 20);
             $table->string('cod_evento');
+            $table->primary(['cod_entrada', 'cod_evento']);
             $table->unsignedInteger('precio');
             $table->integer('stock');
             $table->softDeletes();

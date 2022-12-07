@@ -14,7 +14,7 @@ class EntradasController extends Controller
      */
     public function index()
     {
-        //
+        return Entrada::orderBy('nombre')->get(['cod_entrada','cod_evento','precio']);
     }
 
     /**
