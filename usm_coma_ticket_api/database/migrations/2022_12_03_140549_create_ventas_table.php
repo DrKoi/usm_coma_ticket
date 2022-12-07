@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement();
-            $table->integer('numero');
+            //$table->integer('numero');
             $table->dateTime('fecha');
             $table->string('metodo_pago', 20);
             $table->softDeletes();

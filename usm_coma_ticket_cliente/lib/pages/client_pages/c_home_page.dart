@@ -29,8 +29,10 @@ class _ClienteHomePageState extends State<ClienteHomePage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
-                backgroundImage: AssetImage(
-                    'assets/coma_ticket_variant.png'), /* NetworkImage(
+                backgroundImage: NetworkImage(
+                    'https://imgs.search.brave.com/3h7NI7f7kjq3y3LPpwOvk4ujLfaZIA2dFstQ6fIW_SU/rs:fit:800:800:1/g:ce/aHR0cHM6Ly9zcC1p/bWFnZXMuc3VtbWl0/cG9zdC5vcmcvOTQ3/MDA2LmpwZz9hdXRv/PWZvcm1hdCZmaXQ9/bWF4Jmg9ODAwJml4/bGliPXBocC0yLjEu/MSZxPTM1JnM9ODc2/Njk2NzAwODAwODE2/ZDAxZTBkMWViMzFj/ZTdhYjA'),
+
+                /* NetworkImage(
                     FirebaseAuth.instance.currentUser!.photoURL.toString()) */
               ),
             ),
@@ -66,46 +68,46 @@ class _ClienteHomePageState extends State<ClienteHomePage> {
               children: [
                 ListTile(
                   leading: Icon(Icons.home_outlined),
-                  title: Text("Home"),
+                  title: Text("Inicio"),
                   onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.favorite_border),
-                  title: Text("Favourits"),
+                  title: Text("Favoritos"),
                   /* onTap: () {
                         Get.to(Saved(),transition: Transition.rightToLeft,duration: Duration(seconds: 1));
                       }, */
                 ),
                 ListTile(
                   leading: Icon(Icons.shopping_cart_outlined),
-                  title: Text("Cart"),
+                  title: Text("Carrito"),
                   /* onTap: () {
                         Get.to(NCartPage(),transition: Transition.rightToLeft,duration: Duration(seconds: 1));
                       }, */
                 ),
-                ListTile(
+                /* ListTile(
                   leading: Icon(Icons.shopping_bag_outlined),
                   title: Text("Orders"),
                   /* onTap: () {
                         Get.to(OrderPage(),transition: Transition.rightToLeft,duration: Duration(seconds: 1));
                       }, */
-                ),
+                ), */
                 Divider(
                   color: Colors.black,
                 ),
                 ListTile(
                   leading: Icon(Icons.person_outline_outlined),
-                  title: Text("Profile"),
+                  title: Text("Perfil"),
                   onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.settings_outlined),
-                  title: Text("Settings"),
+                  title: Text("Configuración"),
                   onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.logout_outlined),
-                  title: Text("Logout"),
+                  title: Text("Cerrar Sesión"),
                   onTap: () {
                     logout(context);
                   },
