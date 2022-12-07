@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('eventos', function (Blueprint $table) {
-            $table->string('cod_evento', 20)->primary();
-            $table->string('nombre', 30);
-            $table->unsignedInteger('precio_entrada');
-            $table->unsignedInteger('stock_entradas');
-            $table->boolean('estado');
-            $table->softDeletes();
+        Schema::table('entradas', function (Blueprint $table) {
+            $table->string('cod_cliente',20);
+            $table->foreign('cod_cliente')->references('cod_cliente')->on('clientes');
+            
         });
     }
 
@@ -30,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eventos');
+        Schema::table('entradas', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->string('cod_cliente')->primary();
+            $table->string('cod_cliente',20)->primary();
             $table->string('nombre');
             $table->string('email');
             $table->softDeletes();

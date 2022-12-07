@@ -13,6 +13,7 @@ class Entrada extends Model
     protected $primaryKey = 'cod_entrada';
     protected $keyType = 'string';
     public $timestamps = false;
+    public $incrementing = false;
     protected $appends = ['cantidad_ventas', 'unidades_vendidas'];
     protected $hidden = ['ventas', 'ventasConPivot'];
 
@@ -31,4 +32,13 @@ class Entrada extends Model
     public function getUnidadesVendidasAttribute(){
         return $this->ventasConPivot->sum('pivot.cantidad');
     }
+
+    /* public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model){
+            $model->num_entrada = Entrada::where('cod_evento', $model->cod_evento)->max('num_entrada')+1;
+        });
+    } */
 }
