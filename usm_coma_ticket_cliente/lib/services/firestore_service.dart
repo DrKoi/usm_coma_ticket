@@ -3,12 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreService {
   //obtener los productos
   Stream<QuerySnapshot> noticias() {
-    // return FirebaseFirestore.instance.collection('productos').snapshots();
-    //int limite = 10;
-    return FirebaseFirestore.instance
-        .collection('noticias')
-        //.where('stock', isLessThan: limite)
-        .snapshots();
+    return FirebaseFirestore.instance.collection('noticias').snapshots();
   }
 
   //agregar
