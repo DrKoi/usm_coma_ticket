@@ -14,7 +14,7 @@ class VentasController extends Controller
      */
     public function index()
     {
-        //
+        return Venta::all();
     }
 
     /**
@@ -25,7 +25,12 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $venta= new Venta();
+        $venta->id=request->id;
+        $venta->fecha=rquest->fecha;
+        $venta->metodo_pago=request->metodo_pago;
+        $venta->save();
+        return $venta;
     }
 
     /**
@@ -36,7 +41,7 @@ class VentasController extends Controller
      */
     public function show(Venta $venta)
     {
-        //
+        return $venta;
     }
 
     /**
@@ -48,7 +53,11 @@ class VentasController extends Controller
      */
     public function update(Request $request, Venta $venta)
     {
-        //
+        $venta->id=request->id;
+        $venta->fecha=rquest->fecha;
+        $venta->metodo_pago=request->metodo_pago;
+        $venta->save();
+        return $venta;
     }
 
     /**
@@ -59,6 +68,6 @@ class VentasController extends Controller
      */
     public function destroy(Venta $venta)
     {
-        //
+        $venta->delete();
     }
 }

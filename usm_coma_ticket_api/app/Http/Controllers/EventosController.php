@@ -14,7 +14,7 @@ class EventosController extends Controller
      */
     public function index()
     {
-        //
+        return Evento::all();
     }
 
     /**
@@ -25,7 +25,14 @@ class EventosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $evento= new Evento();
+        $evento->cod_evento=request->cod_evento;
+        $evento->nombre=request->nombre;
+        $evento->precio_entrada=request->precio_entrada;
+        $evento->stock_entradas=request->stock_entradas;
+        $evento->estado=request->estado;
+        $evento->save();
+        return $evento;
     }
 
     /**
@@ -36,7 +43,7 @@ class EventosController extends Controller
      */
     public function show(Evento $evento)
     {
-        //
+        return $evento;
     }
 
     /**
@@ -48,7 +55,13 @@ class EventosController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        //
+        $evento->cod_evento=request->cod_evento;
+        $evento->nombre=request->nombre;
+        $evento->precio_entrada=request->precio_entrada;
+        $evento->stock_entradas=request->stock_entradas;
+        $evento->estado=request->estado;
+        $evento->save();
+        return $evento;
     }
 
     /**
@@ -59,6 +72,6 @@ class EventosController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        //
+      $evento->delete();
     }
 }

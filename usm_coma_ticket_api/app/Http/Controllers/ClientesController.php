@@ -14,7 +14,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
+        return Cliente::orderBy('cod_cliente')->get(['cod_cliente','nombre','email']);
     }
 
     /**
@@ -25,7 +25,12 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $cliente = new Cliente();
+       $cliente->cod_cliente= request->cod_cliente;
+       $cliente->nombre= request->nombre;
+       $cliente->email= request->email;
+       $cliente->save();
+       return $cliente;
     }
 
     /**
@@ -36,7 +41,7 @@ class ClientesController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return $cliente;
     }
 
     /**
@@ -48,7 +53,11 @@ class ClientesController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $cliente->cod_cliente= request->cod_cliente;
+        $cliente->nombre= request->nombre;
+        $cliente->email= request->email;
+        $cliente->save();
+        return $cliente;
     }
 
     /**
@@ -59,6 +68,6 @@ class ClientesController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
     }
 }

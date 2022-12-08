@@ -14,7 +14,8 @@ class EntradasController extends Controller
      */
     public function index()
     {
-        return Entrada::orderBy('nombre')->get(['cod_entrada','cod_evento','precio']);
+        return Entrada::all()->load('cliente','evento');
+        //return Entrada::orderBy('cod_entrada')->get(['cod_entrada','cod_cliente','cod_evento','num_entrada','precio_entrada']);
     }
 
     /**
@@ -25,7 +26,15 @@ class EntradasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $entrada= new Entrada();
+        $entrada->cod_entrada= request->cod_entrada;
+        $entrada->cod_cliente=request->cliente; 
+        $entrada->cod_evento=request->evento;
+        $entrada->nombre=request->evento;
+        $entrada->num_entrada=request->num_entrada;
+        $entrada->precio_entrada=request->evento;
+        $entrada->save();
+        return $entrada;
     }
 
     /**
@@ -36,7 +45,7 @@ class EntradasController extends Controller
      */
     public function show(Entrada $entrada)
     {
-        //
+        return $entrada;
     }
 
     /**
@@ -48,7 +57,14 @@ class EntradasController extends Controller
      */
     public function update(Request $request, Entrada $entrada)
     {
-        //
+        $entrada->cod_entrada= request->cod_entrada;
+        $entrada->cod_cliente=request->cliente; 
+        $entrada->cod_evento=request->evento;
+        $entrada->nombre=request->evento;
+        $entrada->num_entrada=request->num_entrada;
+        $entrada->precio_entrada=request->evento;
+        $entrada->save();
+        return $entrada;
     }
 
     /**
@@ -59,6 +75,6 @@ class EntradasController extends Controller
      */
     public function destroy(Entrada $entrada)
     {
-        //
+        $entrada->delete();
     }
 }

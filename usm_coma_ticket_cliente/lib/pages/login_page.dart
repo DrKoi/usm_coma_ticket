@@ -32,9 +32,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    /* emailCtrl.dispose();
-    passCtrl.dispose(); */
+    emailCtrl.dispose();
+    passCtrl.dispose();
     _passFocusNode.dispose();
+
     super.dispose();
   }
 
