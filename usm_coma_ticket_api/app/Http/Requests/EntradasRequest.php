@@ -13,7 +13,7 @@ class EntradasRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class EntradasRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'cod_entrada'=>'required|unique:entradas,cod_entrada',
+            'num_entrada'=>'required|lte:1'
+        ];
+    }
+    public function messages(){
+        return[
+            'cod_entrada.required'=>'Campo obligatorio',
+            'num_entrada.unique'=>'Debe ser único',
+            'num_entrada.lte'=>'Solo se permite comprar una entrada por cliente',
         ];
     }
 }

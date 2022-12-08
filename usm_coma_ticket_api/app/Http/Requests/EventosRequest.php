@@ -13,7 +13,7 @@ class EventosRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class EventosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+           'cod_evento'=>'required|unique:eventos,cod_evento',
+           'nombre'=> 'required',
+           'precio_entrada'=> 'required',
+           'stock_entradas'=> 'required',
+           'estado'=> 'required',
+        ];
+    }
+    public function messages(){
+        return[
+            'cod_evento.required'=>'Campo obligatorio',
+            'cod_evento.unique'=>'Debe ser único',
+            'nombre.required'=>'Campo obligatorio',
+            'precio_entrada.required'=>'Campo obligatorio',
+            'stock_entradas.required'=>'Campo obligatorio',
+            'estado.required'=>'Campo obligatorio',
         ];
     }
 }

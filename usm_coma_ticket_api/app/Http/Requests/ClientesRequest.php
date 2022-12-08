@@ -13,7 +13,7 @@ class ClientesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class ClientesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'cod_cliente'=> 'required|unique:clientes,cod_cliente',
+            'nombre'=> 'required',
+            'email'=> 'required'
+        ];
+    }
+
+    public function messages(){
+        return[
+                'cod_cliente.required'=>'Campo obligatorio',
+                'cod_cliente.unique'=>'Debe ser único',
+                'nombre.required'=>'Campo obligatorio',
+                'email.required'=>'Campo obligatorio',
         ];
     }
 }

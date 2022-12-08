@@ -13,7 +13,7 @@ class VentasRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class VentasRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=> 'required|unique:ventas,id',
+            'fecha'=> 'required',
+            'metodo_pago'=> 'required'
+        ];
+    }
+    public function messages(){
+        return[
+            'id.required'=>'Campo obligatorio',
+            'id.unique'=>'Debe ser único',
+            'fecha.required'=>'Campo obligatorio',
+            'metodo_pago.required'=>'Campo obligatorio',
+            
         ];
     }
 }
