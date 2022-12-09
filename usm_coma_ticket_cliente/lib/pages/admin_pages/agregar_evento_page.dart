@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:usm_coma_ticket_cliente/constants.dart';
 import 'package:usm_coma_ticket_cliente/services/firestore_service.dart';
 
@@ -10,6 +13,11 @@ class AgregarEvento extends StatefulWidget {
 }
 
 class _AgregarEventoState extends State<AgregarEvento> {
+  final ImagePicker _picker = ImagePicker();
+  Future getImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController _tituloCtrl = TextEditingController();
   TextEditingController _descripcionCtrl = TextEditingController();
