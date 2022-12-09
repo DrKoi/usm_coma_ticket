@@ -6,18 +6,18 @@ import 'package:usm_coma_ticket_cliente/services/auth_service.dart';
 import '../../services/firestore_service.dart';
 import 'agregar_evento_page.dart';
 
-class AdminEventos extends StatefulWidget {
-  const AdminEventos({super.key});
+class AdminNoticias extends StatefulWidget {
+  const AdminNoticias({super.key});
 
   @override
-  State<AdminEventos> createState() => _AdminEventosState();
+  State<AdminNoticias> createState() => _AdminNoticiasState();
 }
 
-class _AdminEventosState extends State<AdminEventos> {
+class _AdminNoticiasState extends State<AdminNoticias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Eventos Publicados')),
+      appBar: AppBar(title: Text('Noticias Publicadas')),
       body: Column(
         children: [
           StreamBuilder(

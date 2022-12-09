@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:usm_coma_ticket_cliente/constants.dart';
-import 'package:usm_coma_ticket_cliente/pages/admin_pages/a_eventos.dart';
+import 'package:usm_coma_ticket_cliente/pages/admin_pages/a_noticias_publicadas.dart';
 
 import '../../providers/eventos_provider.dart';
 import '../../services/firestore_service.dart';
@@ -39,7 +39,7 @@ class _AdminInicioPageState extends State<AdminInicioPage> {
               IconButton(
                   onPressed: () {
                     MaterialPageRoute route = MaterialPageRoute(
-                      builder: (context) => AdminEventos(),
+                      builder: (context) => AdminNoticias(),
                     );
                     Navigator.push(context, route);
                   },
