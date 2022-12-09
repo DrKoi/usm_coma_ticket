@@ -7,16 +7,19 @@ class FirestoreService {
   }
 
   //agregar
-  /* Future agregar(String codProducto, String nombre, int stock) {
-    return FirebaseFirestore.instance.collection('productos').doc().set({
-      'cod_producto': codProducto,
-      'nombre': nombre,
-      'stock': stock,
+  Future agregar(String titulo, String descripcion, String image) {
+    return FirebaseFirestore.instance.collection('noticias').doc().set({
+      'titulo': titulo,
+      'descripcion': descripcion,
+      'image': image,
     });
   }
 
   //borrar
-  Future borrar(String productoId) {
-    return FirebaseFirestore.instance.collection('productos').doc(productoId).delete();
+  /* Future borrar(String productoId) {
+    return FirebaseFirestore.instance
+        .collection('productos')
+        .doc(productoId)
+        .delete();
   } */
 }

@@ -12,6 +12,7 @@ final ThemeData theme = ThemeData(
 );
 
 class Palette {
+  //static const Color primary = kPrimaryColor;
   static const Color primary = kPrimaryColor;
 }
 

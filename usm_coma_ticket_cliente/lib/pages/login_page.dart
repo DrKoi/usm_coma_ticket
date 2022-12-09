@@ -230,14 +230,23 @@ class _LoginPageState extends State<LoginPage> {
         email: emailCtrl.text.trim(),
         password: passCtrl.text.trim(),
       );
+      if (emailCtrl.text.trim().endsWith('@comaticket.cl')) {
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        sp.setString('userEmail', userCredential.user!.email.toString());
 
-      SharedPreferences sp = await SharedPreferences.getInstance();
-      sp.setString('userEmail', userCredential.user!.email.toString());
+        MaterialPageRoute route = MaterialPageRoute(
+          builder: (context) => AdminHomePage(),
+        );
+        Navigator.pushReplacement(context, route);
+      } else {
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        sp.setString('userEmail', userCredential.user!.email.toString());
 
-      MaterialPageRoute route = MaterialPageRoute(
-        builder: (context) => MainPage(),
-      );
-      Navigator.pushReplacement(context, route);
+        MaterialPageRoute route = MaterialPageRoute(
+          builder: (context) => MainPage(),
+        );
+        Navigator.pushReplacement(context, route);
+      }
     } on FirebaseAuthException catch (ex) {
       switch (ex.code) {
         case 'user-not-found':
